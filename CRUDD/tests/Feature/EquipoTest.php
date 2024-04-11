@@ -43,7 +43,7 @@ class EquipoTest extends TestCase
     {
         parent::setUp();
 
-        // Crear una sede de prueba directamente en la base de datos
+      
         $this->sede = Sede::create([
             'nombre_sede' => 'Asus',
             'encargadosede' => 'ASK-987',
@@ -55,7 +55,7 @@ class EquipoTest extends TestCase
 
     public function test_show()
     {
-        // Obtener la sede creada en setUp
+        
         $response = $this->get(route('sedes.show', $this->sede->id));
 
         $response->assertStatus(200);
@@ -65,7 +65,7 @@ class EquipoTest extends TestCase
 
     public function test_edit()
     {
-        // Utilizar la sede creada en setUp
+        
         $response = $this->get(route('sedes.edit', $this->sede->id));
 
         $response->assertStatus(200);
