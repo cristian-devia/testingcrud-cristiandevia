@@ -45,9 +45,9 @@ class EquipoTest extends TestCase
 
       
         $this->sede = Sede::create([
-            'nombre_sede' => 'Asus',
-            'encargadosede' => 'ASK-987',
-            'ubicacion' => '1.500.000',
+            'equipo' => 'Asus',
+            'serial' => 'ASK-987',
+            'precio' => '1.500.000',
         ]);
     }
 
@@ -73,6 +73,40 @@ class EquipoTest extends TestCase
         $response->assertViewHas('sede', $this->sede);
     }
 
+    public function test_update()
+{
+    
+    $newSedeData = [
+        'equipo' => 'LENOVO',
+        'serial' => 'ASK-987',
+        'precio' => 'Nueva Ubicación'
+    ];
+
+    $response = $this->put(route('sedes.update', $this->sede->id), $newSedeData);
+
+    $response->assertRedirect(route('sedes.index'));
+
+    
+    $this->sede->refresh();
+
+    
+    $this->assertEquals($newSedeData['nombre_sede'], $this->sede->nombre_sede);
+    $this->assertEquals($newSedeData['encargadosede'], $this->sede->encargadosede);
+    $this->assertEquals($newSedeData['ubicacion'], $this->sede->ubicacion);
+}
+
+    public function test_destroy()
+{
+    
+    $response = $this->delete(route('sedes.destroy', $this->sede->id));
+
+    $response->assertRedirect(route('sedes.index'));
+
+    
+    $this->assertDatabaseMissing('sedes', ['id' => $this->sede->id]);
+}
+
+    
    
     
 }
