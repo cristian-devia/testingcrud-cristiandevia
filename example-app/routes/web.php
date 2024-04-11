@@ -25,11 +25,9 @@ Route::get('/', function () {
 
 
 
-Route::resource('products', ProductController::class);  
-Route::resource('garants', GarantController::class); 
+
 Route::resource('sedes', SedeController::class);
-Route::resource('asings', AsingController::class);
-Route::resource('repars', ReparController::class);
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
